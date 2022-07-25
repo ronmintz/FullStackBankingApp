@@ -1,0 +1,16 @@
+{
+  "name": "bank_three_tiers",
+  "version": "1.0.0",
+  "description": "Full Stack Bank Implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ron",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "firebase": "^9.9.0"
+  }
+}
