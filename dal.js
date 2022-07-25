@@ -1,14 +1,24 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://doadmin:62V8P097W1vsJO4L@mongodb-2cbf95e2.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
 let db = null;
+console.log(url);
 
 // connect to mongo
-MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
-    console.log("Connected successfully to db server");
+const client = new MongoClient(url);
 
-    // connect to myproject database
-    db = client.db('myproject');
-});
+// Use the connect method to connect to the server.
+client.connect(err => {
+    if (err != null) {
+      console.log("failed: ", err);
+      return;
+    }
+    console.log("Connected successfully to mongodb server");
+  
+  
+      // connect to myproject database
+      db = client.db('myproject');
+  });
+
 
 // create user account using the collection.insertOne function
 function create_account_doc(name, email, password) {
