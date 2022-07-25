@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://doadmin:62V8P097W1vsJO4L@mongodb-2cbf95e2.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
+const url = 'mongodb+srv://doadmin:62V8P097W1vsJO4L@mongodb-2cbf95e2.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=mongodb';
 let db = null;
 console.log(url);
 
