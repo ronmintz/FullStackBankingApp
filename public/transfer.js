@@ -75,7 +75,7 @@ function Transfer() {
               <>
               Balance      {balance}<br/><br/>
               Transfer Amount<br/>
-              <input type="input" className="form-control" id="wdl_amount" placeholder="Withdraw Amount"
+              <input type="input" className="form-control" id="wdl_amount" placeholder="Transfer Amount"
                value={amount} onChange={e => setAmount(e.currentTarget.value)}/><br/>
                
               Transfer to email<br/>
