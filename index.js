@@ -133,7 +133,7 @@ app.get('/account/transfer/:transferee_email/:amount', function (req, res) {
         return;
     }
 
-    if (transferee_email === logged_in_account_doc.email)
+    if (req.params.transferee_email === logged_in_account_doc.email)
         res.send({msg: 'Cannot transfer to the same account'});
     else {
         dal.find_account_docs(req.params.transferee_email)
