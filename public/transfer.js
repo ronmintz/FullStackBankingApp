@@ -48,6 +48,7 @@ function Transfer() {
       .then (json_data => {
         if (json_data.msg) {
             setStatus(json_data.msg) // Transfer failed: transferee email not found
+                                     // or attempt to transfer to same account.
             setTimeout(() => setStatus(''),9000);
         }
         else {

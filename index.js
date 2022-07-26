@@ -133,24 +133,28 @@ app.get('/account/transfer/:transferee_email/:amount', function (req, res) {
         return;
     }
 
-    dal.find_account_docs(req.params.transferee_email)
-        .then(async (acct_docs) => {
-            if(acct_docs.length > 0) {
-                var transferee_account_doc = acct_docs[0];
+    if (transferee_email === logged_in_account_doc.email)
+        res.send({msg: 'Cannot transfer to the same account'});
+    else {
+        dal.find_account_docs(req.params.transferee_email)
+            .then(async (acct_docs) => {
+                if(acct_docs.length > 0) {
+                    var transferee_account_doc = acct_docs[0];
                 
-                transferee_account_doc.balance += Number(req.params.amount);
-                await dal.update_account_balance(transferee_account_doc); // update this document in database
-                logged_in_account_doc.balance -= Number(req.params.amount);
-                dal.update_account_balance(logged_in_account_doc) // update this document in database
-                    .then ((doc) => {
-                        console.log(doc);
-                        res.send(doc); // logged in acct doc with new balance
-                    });
+                    transferee_account_doc.balance += Number(req.params.amount);
+                    await dal.update_account_balance(transferee_account_doc); // update this document in database
+                    logged_in_account_doc.balance -= Number(req.params.amount);
+                    dal.update_account_balance(logged_in_account_doc) // update this document in database
+                        .then ((doc) => {
+                            console.log(doc);
+                            res.send(doc); // logged in acct doc with new balance
+                        });
+                }
+                else {
+                    res.send({msg: 'Transfer failed: transferee email not found'});
             }
-            else {
-                res.send({msg: 'Transfer failed: transferee email not found'});
-            }
-        });
+            });
+    }
 });
 
 // all accounts
